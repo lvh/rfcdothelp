@@ -53,14 +53,15 @@
              :on-key-up (fn [e]
                           (when (= (.-keyCode e) 13)
                             (set-rfc! nil)))}]]
-   (if-let [rfc (:rfc @state)]
-     [:div
-      "<rfc.help> i am so sorry :( wouldn't you rather have this:"
-      (lego-img-with-link rfc)
-      "<you> yes i would"]
-     [:button
-      {:on-click set-rfc!}
-      "acquire happies"])])
+   (let [rfc (:rfc @state)]
+     (if (empty? rfc)
+       [:button
+        {:on-click set-rfc!}
+        "acquire happies"]
+       [:div
+        "<rfc.help> i am so sorry :( wouldn't you rather have this:"
+        (lego-img-with-link rfc)
+        "<you> yes i would"]))])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
