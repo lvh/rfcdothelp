@@ -1220,3 +1220,8 @@ notifying browser that file changed:  /rfcdothelp/core.js
 notifying browser that file changed:  resources/public/js/out/cljs_deps.js
 notifying browser that file changed:  /rfcdothelp/core.js
 sending changed CSS file: resources/public/css/site.min.css
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.079 seconds.[0m
+notifying browser that file changed:  resources/public/js/out/cljs_deps.js
+notifying browser that file changed:  /rfcdothelp/core.js
+sending changed CSS file: resources/public/css/site.min.css

@@ -49,7 +49,7 @@
     [:input {:id "bad-rfc"
              :type "number"
              :style {"width" "10%"}
-             :value (:rfc @state)
+             :placeholder (:rfc @state)
              :on-key-up (fn [e]
                           (when (= (.-keyCode e) 13)
                             (set-rfc! nil)))}]]
