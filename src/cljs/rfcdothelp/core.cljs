@@ -66,7 +66,8 @@
             {:on-click set-rfc!}
             "acquire happies"]
        :error [:div
-               "<rfc.help> i am so sorry :( have this instead:"
+               (str "<rfc.help> i am so sorry :( i can't find an appropriate "
+                    "replacement but have this instead:")
                [:img {:src unikitty}]]
        [:div
         "<rfc.help> i am so sorry :( wouldn't you rather have this:"
