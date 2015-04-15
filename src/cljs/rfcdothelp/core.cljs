@@ -10,25 +10,28 @@
 (def state
   (atom {:rfc nil}))
 
-(defn lego-set-url
+(defn brick-set-url
   [rfc]
-  (str "http://brickset.com/sets/" rfc))
+  (str "//brickset.com/sets/" rfc))
 
-(defn lego-set-img-url
+(defn brick-set-img-url
   [rfc]
-  (str "http://images.brickset.com/sets/images/" rfc "-1.jpg"))
+  (str "//images.brickset.com/sets/images/" rfc "-1.jpg"))
 
-(defn lego-img-with-link
+(defn brick-img-with-link
   [rfc]
-  [:a {:href (lego-set-url rfc)}
-   [:img {:width "100%"
-          :src (lego-set-img-url rfc)}]])
+  [:a {:href (brick-set-url rfc)}
+   [:img {:id "brick-set"
+          :width "100%"
+          :src (brick-set-img-url rfc)
+          :on-error (fn [_]
+                      (swap! state assoc :rfc :error))}]])
 
-(defn lego-set-iframe
+(defn brick-set-iframe
   [rfc]
   [:iframe {:width "80%"
             :height "100%"
-            :src (lego-set-url rfc)}])
+            :src (brick-set-url rfc)}])
 
 (defn set-rfc!
   [_]
@@ -38,6 +41,10 @@
 
 ;; -------------------------
 ;; Views
+
+(def unikitty
+  (str "http://vignette2.wikia.nocookie.net/lego/images/3/3e/"
+       "70803-unikitty.jpg/revision/latest?cb=20131215000632"))
 
 (defn home-page []
   [:div [:h2 "rfc.help"]
@@ -54,13 +61,16 @@
                           (when (= (.-keyCode e) 13)
                             (set-rfc! nil)))}]]
    (let [rfc (:rfc @state)]
-     (if (empty? rfc)
-       [:button
-        {:on-click set-rfc!}
-        "acquire happies"]
+     (case rfc
+       nil [:button
+            {:on-click set-rfc!}
+            "acquire happies"]
+       :error [:div
+               "<rfc.help> i am so sorry :( have this instead:"
+               [:img {:src unikitty}]]
        [:div
         "<rfc.help> i am so sorry :( wouldn't you rather have this:"
-        (lego-img-with-link rfc)
+        (brick-img-with-link rfc)
         "<you> yes i would"]))])
 
 (defn current-page []
