@@ -16,12 +16,12 @@
 
 (defn brick-set-img-url
   [rfc]
-  (str "//images.brickset.com/sets/images/" rfc "-1.jpg"))
+  (str "//images.brickset.com/sets/images/" rfc "-1.jpg?"))
 
 (defn brick-img-with-link
   [rfc]
   [:a {:href (brick-set-url rfc)}
-   [:img {:id "brick-set"
+   [:img {:id "brick-set-img"
           :width "100%"
           :src (brick-set-img-url rfc)
           :on-error (fn [_]
@@ -66,8 +66,7 @@
             {:on-click set-rfc!}
             "acquire happies"]
        :error [:div
-               (str "<rfc.help> i am so sorry :( i can't find an appropriate "
-                    "replacement but have this instead:")
+               "<rfc.help> i am so sorry, have this instead:"
                [:img {:src unikitty}]]
        [:div
         "<rfc.help> i am so sorry :( wouldn't you rather have this:"
